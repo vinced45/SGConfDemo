@@ -9,6 +9,17 @@ import ActivityKit
 import SwiftUI
 
 struct LiveActivityManager {
+    static func startLiveActivity(for session: ConfSession) {
+        LiveActivityManager.startLiveActivity(
+            id: session.id,
+            sessionName: session.title,
+            startTime: session.startTime,
+            endTime: session.endTime,
+            speaker: session.speaker?.name ?? "",
+            imageUrl: session.speaker?.photoURL ?? "",
+            isFavorite: session.isFavorite)
+    }
+    
     static func startLiveActivity(id: UUID, sessionName: String, startTime: Date, endTime: Date, speaker: String, imageUrl: String, isFavorite: Bool) {
         let attributes = SessionActivityAttributes()
         let fileName = "speaker-\(id.uuidString).jpg"

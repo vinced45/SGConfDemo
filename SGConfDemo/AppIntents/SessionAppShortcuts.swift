@@ -13,6 +13,16 @@ struct SessionAppShortcuts: AppShortcutsProvider {
     
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
+            intent: StartSessionLiveActivityIntent(),
+            phrases: [
+                "Start Live Activity for \(.applicationName)",
+                "Start Live Activity for \(\.$targetSession) Session for \(.applicationName)",
+            ],
+            shortTitle: "Sart Live Activity",
+            systemImageName: "bolt.fill"
+        )
+        
+        AppShortcut(
             intent: OpenSpeakerIntent(),
             phrases: [
                 "Open Speaker for \(.applicationName)",

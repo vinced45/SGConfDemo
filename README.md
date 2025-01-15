@@ -114,4 +114,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ## Author
 
 **Vince Davis**  
-iOS Engineer | [GitHub](https://github.com/your-username) | [Twitter](https://twitter.com/your-handle)
+iOS Engineer | [GitHub](https://github.com/vincedavis) | [X](https://x.com/vincedavis)

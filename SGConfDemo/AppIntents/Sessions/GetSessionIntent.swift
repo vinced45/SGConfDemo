@@ -29,3 +29,5 @@ struct GetSessionIntent: AppIntent {
         Summary("Get \(\.$targetSession)", table: "Select a Session.")
     }
 }
+
+

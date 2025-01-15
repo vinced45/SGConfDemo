@@ -185,8 +185,8 @@ public extension LiveActivitySessionView {
     var dynamicCenter: some View {
         VStack(alignment: .center, spacing: 8) {
             HStack(alignment: .center) {
-                if let image = ImageHelper.loadImage(fileName: state.speakerImageFileName) {
-                    Image(uiImage: image)
+                if let asset = state.speakerName.split(separator: " ").first {
+                    Image(asset.lowercased())
                         .resizable()
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 50, height: 50)

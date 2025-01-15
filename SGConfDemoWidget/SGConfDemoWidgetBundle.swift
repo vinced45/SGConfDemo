@@ -12,7 +12,7 @@ import SwiftUI
 struct SGConfDemoWidgetBundle: WidgetBundle {
     var body: some Widget {
         //SGConfDemoWidget()
-        //SGConfDemoWidgetControl()
+        StartLiveActivityControl()
         SGConfDemoLiveActivity()
     }
 }

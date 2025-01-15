@@ -9,28 +9,16 @@ import AppIntents
 import SwiftUI
 import WidgetKit
 
-//struct OpenSessionConfiguration: WidgetConfigurationIntent {
-//    static var title: LocalizedStringResource = "Open Session"
-//    
-//    @Parameter(title: "Session")
-//    var session: SessionEntity?
-//    
-//    func perform() async throws -> some IntentResult {
-//        return .result()
-//    }
-//}
-//extension OpenSessionConfiguration: ControlConfigurationIntent {}
-//
-//struct OpenSessionControl: ControlWidget {
-//    var body: some ControlWidgetConfiguration {
-//        AppIntentControlConfiguration(
-//            kind: "com.example.OpenSession",
-//            intent: OpenSessionIntent.self
-//        ) { config in
-//            ControlWidgetButton(action: config) {
-//                Image(systemName:"calendar")
-//                Text("Open Session")
-//            }
-//        }
-//    }
-//}
+struct StartLiveActivityControl: ControlWidget {
+    var body: some ControlWidgetConfiguration {
+        StaticControlConfiguration(
+            kind: "com.vincedavis.sgdemo.startliveactivitycontrol"
+        ) {
+            ControlWidgetButton(action: StartSessionLiveActivityIntent()) {
+                Label("Start Live Activity", systemImage: "bolt.fill")
+            }
+        }
+        .displayName("Start Live Activity")
+        .description("Start Live Activity")
+    }
+}
