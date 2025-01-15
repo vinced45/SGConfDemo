@@ -151,7 +151,7 @@
 		61264DC32D379D7B009B2715 /* GetAllSpeakersIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAllSpeakersIntent.swift; sourceTree = "<group>"; };
 		61264DCA2D37A245009B2715 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		61264DCD2D37C81F009B2715 /* SpeakerRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakerRowView.swift; sourceTree = "<group>"; };
-		6191ACAD2D343BF400047801 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6191ACAD2D343BF400047801 /* SG Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SG Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6191ACBF2D343BF500047801 /* SGConfDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SGConfDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6191ACC92D343BF500047801 /* SGConfDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SGConfDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6191ACE12D3492D600047801 /* SwiftData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftData.framework; path = System/Library/Frameworks/SwiftData.framework; sourceTree = SDKROOT; };
@@ -349,7 +349,7 @@
 		6191ACAE2D343BF400047801 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6191ACAD2D343BF400047801 /* Demo.app */,
+				6191ACAD2D343BF400047801 /* SG Demo.app */,
 				6191ACBF2D343BF500047801 /* SGConfDemoTests.xctest */,
 				6191ACC92D343BF500047801 /* SGConfDemoUITests.xctest */,
 				6191ACED2D34A06900047801 /* SGConfDemoWidgetExtension.appex */,
@@ -449,7 +449,7 @@
 			packageProductDependencies = (
 			);
 			productName = SGConfDemo;
-			productReference = 6191ACAD2D343BF400047801 /* Demo.app */;
+			productReference = 6191ACAD2D343BF400047801 /* SG Demo.app */;
 			productType = "com.apple.product-type.application";
 		};
 		6191ACBE2D343BF500047801 /* SGConfDemoTests */ = {
@@ -864,7 +864,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vincedavis.SGConfDemo2;
-				PRODUCT_NAME = Demo;
+				PRODUCT_NAME = "SG Demo";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -896,7 +896,7 @@
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vincedavis.SGConfDemo2;
-				PRODUCT_NAME = Demo;
+				PRODUCT_NAME = "SG Demo";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
