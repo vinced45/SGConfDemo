@@ -4,11 +4,16 @@
 //
 //  Created by Vince Davis on 1/15/25.
 //
-
+import AppIntents
+import SwiftUI
+import SwiftData
 
 struct OpenSessionIntent: AppIntent {
     static var title: LocalizedStringResource = "Open Session"
-    static var description: IntentDescription = "Open Session with details."
+    static var description = IntentDescription(
+        "Open Session with details",
+        categoryName: "Session"
+    )
     static var openAppWhenRun: Bool = true
     
     @Parameter(title: "Session")
@@ -26,6 +31,8 @@ struct OpenSessionIntent: AppIntent {
     static var parameterSummary: any ParameterSummary {
         Summary("Open \(\.$targetSession)", table: "Select a Session.")
     }
+    
+    
     
     @Dependency
     private var appState: AppState

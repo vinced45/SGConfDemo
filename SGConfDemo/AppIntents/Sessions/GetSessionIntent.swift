@@ -10,7 +10,10 @@ import SwiftData
 
 struct GetSessionIntent: AppIntent {
     static var title: LocalizedStringResource = "Get Session"
-    static var description: IntentDescription = "Get Session with details."
+    static var description = IntentDescription(
+        "Get session with details",
+        categoryName: "Session"
+    )
     static var openAppWhenRun: Bool = false
     
     @Parameter(title: "Session")
@@ -18,7 +21,7 @@ struct GetSessionIntent: AppIntent {
 
     func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView & ReturnsValue<SessionEntity?> {
         return .result(value: targetSession,
-                       dialog: "The session \($targetSession.title) is on \(targetSession.startTime.formatted(date: .abbreviated, time: .omitted)) and starts at \(targetSession.startTime.formatted(date: .omitted, time: .shortened))",
+                       dialog: "The session \(targetSession.name) is on \(targetSession.startTime.formatted(date: .abbreviated, time: .omitted)) and starts at \(targetSession.startTime.formatted(date: .omitted, time: .shortened))",
                        view: SessionRowView(session: targetSession.data))
     }
     

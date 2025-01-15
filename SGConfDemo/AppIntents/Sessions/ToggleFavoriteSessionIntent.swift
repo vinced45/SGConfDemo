@@ -22,7 +22,7 @@ struct ToggleFavoriteSessionIntent: AppIntent, LiveActivityIntent {
     static var title: LocalizedStringResource = "Toggle Favorite Session"
     static var description = IntentDescription(
         "Toggles the favorite status of a given session.",
-        categoryName: "Favorites"
+        categoryName: "Session"
     )
 
     var sessionID: String

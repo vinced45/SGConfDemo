@@ -1,6 +1,19 @@
+//
+//  GetSpeakerIntent.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
+import AppIntents
+import SwiftUI
+import SwiftData
+
 struct GetSpeakerIntent: AppIntent {
     static var title: LocalizedStringResource = "Get Speaker"
-    static var description: IntentDescription = "Get speaker with details."
+    static var description = IntentDescription(
+        "Get Speaker with details",
+        categoryName: "Speaker"
+    )
     static var openAppWhenRun: Bool = false
 
     @Parameter(title: "Speaker")
@@ -22,3 +35,5 @@ struct GetSpeakerIntent: AppIntent {
     @Dependency
     private var appState: AppState
 }
+
+

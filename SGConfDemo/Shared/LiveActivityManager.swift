@@ -9,37 +9,89 @@ import ActivityKit
 import SwiftUI
 
 struct LiveActivityManager {
-    static func startLiveActivity(sessionName: String, startTime: Date, endTime: Date) {
-        let attributes = SessionActivityAttributes(sessionName: sessionName)
-        let initialContentState = SessionActivityAttributes.ContentState(
-            sessionTitle: sessionName,
-            sessionStartTime: startTime,
-            sessionEndTime: endTime
-        )
+    static func startLiveActivity(id: UUID, sessionName: String, startTime: Date, endTime: Date, speaker: String, imageUrl: String, isFavorite: Bool) {
+        let attributes = SessionActivityAttributes()
+        let fileName = "speaker-\(id.uuidString).jpg"
 
-        do {
-            let _ = try Activity<SessionActivityAttributes>.request(
-                attributes: attributes,
-                contentState: initialContentState,
-                pushType: nil
-            )
-            print("Live Activity started!")
-        } catch {
-            print("Failed to start Live Activity: \(error)")
+        Task {
+            do {
+                let success = try await ImageHelper.downloadAndSaveImage(urlString: imageUrl, fileName: fileName)
+                if success {
+                    let state = SessionActivityAttributes.ContentState(
+                        sessionID: id,
+                        sessionTitle: sessionName,
+                        sessionStartTime: startTime,
+                        sessionEndTime: endTime,
+                        speakerName: speaker,
+                        speakerImageFileName: fileName,
+                        isFavorite: isFavorite
+                    )
+
+                    // I only want 1 Live Activity at a time for this Attribute
+                    if LiveActivityManager.isLiveActivityActive() {
+                        LiveActivityManager.updateLiveActivity(id: id,
+                                                               sessionName: sessionName,
+                                                               startTime: startTime,
+                                                               endTime: endTime,
+                                                               speaker: speaker,
+                                                               imageUrl: imageUrl,
+                                                               isFavorite: isFavorite)
+                        return
+                    }
+
+                    do {
+                        let _ = try Activity<SessionActivityAttributes>.request(
+                            attributes: attributes,
+                            contentState: state,
+                            pushType: nil
+                        )
+                        print("Live Activity started!")
+                    } catch {
+                        print("Failed to start Live Activity: \(error)")
+                    }
+                }
+            } catch {
+                print("Failed to download and save image: \(error.localizedDescription)")
+            }
         }
     }
+    
+    static func update(session: ConfSession) {
+        LiveActivityManager.updateLiveActivity(id: session.id,
+                                               sessionName: session.title,
+                                               startTime: session.startTime,
+                                               endTime: session.endTime,
+                                               speaker: session.speaker?.name ?? "",
+                                               imageUrl: session.speaker?.photoURL ?? "",
+                                               isFavorite: session.isFavorite)
+    }
 
-    static func updateLiveActivity(sessionName: String, startTime: Date, endTime: Date) {
+    static func updateLiveActivity(id: UUID, sessionName: String, startTime: Date, endTime: Date, speaker: String, imageUrl: String, isFavorite: Bool) {
+        guard LiveActivityManager.isLiveActivityActive() else { return }
+        
+        let fileName = "speaker-\(id.uuidString).jpg"
+        
         Task {
-            let updatedContentState = SessionActivityAttributes.ContentState(
-                sessionTitle: "\(sessionName) (Updated!)",
-                sessionStartTime: startTime,
-                sessionEndTime: endTime
-            )
+            do {
+                let success = try await ImageHelper.downloadAndSaveImage(urlString: imageUrl, fileName: fileName)
+                if success {
+                    let updatedContentState = SessionActivityAttributes.ContentState(
+                        sessionID: id,
+                        sessionTitle: "\(sessionName)",
+                        sessionStartTime: startTime,
+                        sessionEndTime: endTime,
+                        speakerName: speaker,
+                        speakerImageFileName: imageUrl,
+                        isFavorite: isFavorite
+                    )
 
-            for activity in Activity<SessionActivityAttributes>.activities {
-                await activity.update(using: updatedContentState)
-                print("Live Activity updated!")
+                    for activity in Activity<SessionActivityAttributes>.activities {
+                        await activity.update(using: updatedContentState)
+                        print("Live Activity updated!")
+                    }
+                }
+            } catch {
+                print("Failed to download and save image: \(error.localizedDescription)")
             }
         }
     }
@@ -51,5 +103,14 @@ struct LiveActivityManager {
                 print("Live Activity ended!")
             }
         }
+    }
+    
+    static func isLiveActivityActive() -> Bool {
+        for activity in Activity<SessionActivityAttributes>.activities {
+            if activity.id != nil {
+                return true
+            }
+        }
+        return false
     }
 }

@@ -1,11 +1,21 @@
+//
+//  ToggleFavoriteCurrentSessionIntent.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
+
+
 import AppIntents
 import SwiftUI
 import SwiftData
 
 struct ToggleFavoriteCurrentSessionIntent: AppIntent {
     static var title: LocalizedStringResource = "Toggle favorite for current session"
-    static var description: IntentDescription = "Toggle favorite for current session"
-    
+    static var description = IntentDescription(
+        "Toggles the favorite status of a given session.",
+        categoryName: "Session"
+    )
 //    @Parameter(title: "Session")
 //    var targetSession: ConfSession
 

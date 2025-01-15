@@ -5,38 +5,70 @@
 //  Created by Vince Davis on 1/12/25.
 //
 
-
 import Foundation
+import SwiftData
 
 struct MockData {
-    static let sessions: [ConfSession] = [
-        ConfSession(
-            id: UUID(),
-            title: "Keynote: The Future of Swift",
-            startTime: Calendar.current.date(bySettingHour: 9, minute: 0, second: 0, of: Date())!,
-            endTime: Calendar.current.date(bySettingHour: 10, minute: 0, second: 0, of: Date())!,
-            desc: "Join us for an exciting keynote about the latest and greatest advancements in Swift."
-        ),
-        ConfSession(
-            id: UUID(),
-            title: "SwiftUI Deep Dive",
-            startTime: Calendar.current.date(bySettingHour: 10, minute: 30, second: 0, of: Date())!,
-            endTime: Calendar.current.date(bySettingHour: 11, minute: 30, second: 0, of: Date())!,
-            desc: "Explore advanced techniques in SwiftUI with hands-on examples and real-world use cases."
-        ),
-        ConfSession(
-            id: UUID(),
-            title: "Concurrency in Swift: Best Practices",
-            startTime: Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: Date())!,
-            endTime: Calendar.current.date(bySettingHour: 13, minute: 0, second: 0, of: Date())!,
-            desc: "Learn how to write efficient and safe concurrent code in Swift using async/await."
-        ),
-        ConfSession(
-            id: UUID(),
-            title: "Networking with Swift: Beyond the Basics",
-            startTime: Calendar.current.date(bySettingHour: 14, minute: 0, second: 0, of: Date())!,
-            endTime: Calendar.current.date(bySettingHour: 15, minute: 0, second: 0, of: Date())!,
-            desc: "A comprehensive session on making network requests and managing responses effectively in Swift."
-        )
+    static let speakers: [Speaker] = [
+        .klemens,
+        .carola,
+        .christian,
+        .paul,
+        .jane,
+        .donny,
+        .daniel,
+        .riana,
+        .alex,
+        .charlie,
+        .dai,
+        .he,
+        .jasper,
+        .jeff,
+        .kosala,
+        .krzysztof,
+        .monika,
+        .mustafa,
+        .priyal,
+        .ryan,
+        .vijay,
+        .vince
     ]
+
+    static let sessions: [ConfSession] = [
+        .levelupPart1,
+        .levelupPart2,
+        .swiftConcurrencyPart1,
+        .swiftConcurrencyPart2,
+        .bulidingHyper,
+        .userdefaults,
+        .sideEffects
+    ]
+    
+    func seedMockDataIfNeeded(using context: ModelContext) {
+        do {
+            // Check if data already exists
+            let existingSessions = try context.fetch(FetchDescriptor<ConfSession>())
+            if !existingSessions.isEmpty {
+                print("Mock data already seeded.")
+                return
+            }
+
+            // Insert mock speakers
+            for speaker in MockData.speakers {
+                context.insert(speaker)
+            }
+
+            // Insert mock sessions
+            for session in MockData.sessions {
+                context.insert(session)
+            }
+
+            // Save the context
+            try context.save()
+            print("Mock data seeded successfully.")
+        } catch {
+            print("Error seeding mock data: \(error)")
+        }
+    }
 }
+

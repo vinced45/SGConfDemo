@@ -1,8 +1,16 @@
+//
+//  ConfSession.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
+
+
 import Foundation
 import SwiftData
 
 @Model
-class ConfSession {
+final class ConfSession {
     @Attribute(.unique) var id: UUID
     var title: String
     var startTime: Date
@@ -20,3 +28,5 @@ class ConfSession {
         self.speaker = speaker
     }
 }
+
+extension ConfSession: Identifiable, Sendable {}

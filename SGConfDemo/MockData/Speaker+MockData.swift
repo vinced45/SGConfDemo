@@ -4,7 +4,7 @@
 //
 //  Created by Vince Davis on 1/14/25.
 //
-
+import Foundation
 
 extension Speaker {
     static let klemens: Speaker = Speaker(

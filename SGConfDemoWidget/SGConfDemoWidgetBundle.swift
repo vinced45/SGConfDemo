@@ -11,8 +11,8 @@ import SwiftUI
 @main
 struct SGConfDemoWidgetBundle: WidgetBundle {
     var body: some Widget {
-        SGConfDemoWidget()
-        SGConfDemoWidgetControl()
-        SGConfDemoWidgetLiveActivity()
+        //SGConfDemoWidget()
+        //SGConfDemoWidgetControl()
+        SGConfDemoLiveActivity()
     }
 }

@@ -1,14 +1,23 @@
+//
+//  OpenSpeakerIntent.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
 import AppIntents
 import SwiftUI
 import SwiftData
 
 struct OpenSpeakerIntent: AppIntent {
     static var title: LocalizedStringResource = "Open Speaker"
-    static var description: IntentDescription = "Open speaker with details."
+    static var description = IntentDescription(
+        "Open speaker with details",
+        categoryName: "Speaker"
+    )
     static var openAppWhenRun: Bool = true
 
     @Parameter(title: "Speaker")
-    var targetSpeaker: Speaker
+    var targetSpeaker: SpeakerEntity
 
     func perform() async throws -> some IntentResult {
         if !appState.path.isEmpty {

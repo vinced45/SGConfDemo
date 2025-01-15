@@ -1,73 +1,162 @@
+//
+//  ConfSessionManager.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/12/25.
+//
+
 import Foundation
 import SwiftData
+import SwiftUI
+import Observation
 
-class ConfSessionManager {
-    private var useMockData: Bool
-    private var mockData: [ConfSession]
+enum ConfSessionError: Error {
+    case unexpected
+    case unableToFetch
+    case unableToSave
+}
 
-    init(useMockData: Bool = false) {
-        self.useMockData = useMockData
-        self.mockData = MockData.sessions // Replace with your mock data source
+fileprivate let modelContainer: ModelContainer = {
+    let schema = Schema([
+        ConfSession.self,
+        Speaker.self
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+    do {
+        return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+        fatalError("Could not create ModelContainer: \(error)")
     }
+}()
 
-    /// Fetches sessions based on the mode (SwiftData or MockData)
+@Observable
+class ConfSessionManager {
+    private var modelContext: ModelContext?
+    
+    var sessions: [ConfSession] = .init()
+    var speakers: [Speaker] = .init()
+
+    init() {
+        self.modelContext = ModelContext(modelContainer)
+    }
+}
+
+// MARK: - Session Methods
+extension ConfSessionManager {
     func fetchSessions() async -> [ConfSession] {
-        if useMockData {
-            return fetchMockSessions()
-        } else {
-            return await fetchSwiftDataSessions()
+        return await fetchSwiftDataSessions()
+    }
+    
+    func fetchSession(id: UUID) async throws -> ConfSession? {
+        do {
+            let sessions = try modelContext?.fetch(FetchDescriptor<ConfSession>())
+            guard let session = sessions?.first(where: { $0.id == id }) else {
+                throw ConfSessionError.unableToFetch
+            }
+            return session
+        } catch {
+            throw ConfSessionError.unableToFetch
         }
     }
-
-    /// Fetches mock sessions
-    private func fetchMockSessions() -> [ConfSession] {
-        return mockData
+    
+    func toggleFavorite(id: UUID) async throws {
+        do {
+            let sessions = try modelContext?.fetch(FetchDescriptor<ConfSession>())
+            guard let session = sessions?.first(where: { $0.id == id }) else {
+                throw ConfSessionError.unableToSave
+            }
+            session.isFavorite.toggle()
+            try modelContext?.save()
+        }
+    }
+    
+    func fetchSessions(with identifiers: [UUID]) async -> [ConfSession] {
+        let sessions = await fetchSwiftDataSessions()
+        return sessions.compactMap { session in
+            return identifiers.contains(session.id) ? session : nil
+            
+        }
     }
 
     /// Fetches sessions from SwiftData
     private func fetchSwiftDataSessions() async -> [ConfSession] {
+        guard let modelContext else {
+            print("ModelContext is not available.")
+            return []
+        }
+
         do {
-            let fetchRequest = FetchRequest<ConfSession>(predicate: nil)
-            return try await ModelContext.main.fetch(fetchRequest)
+            let fetchRequest = FetchDescriptor<ConfSession>() // Updated for SwiftData
+            return try modelContext.fetch(fetchRequest)
         } catch {
             print("Failed to fetch sessions from SwiftData: \(error)")
             return []
         }
     }
-
-    /// Adds a new session to the data source
-    func addSession(_ session: ConfSession) async {
-        guard !useMockData else {
-            print("Mock mode enabled, changes won't be saved.")
-            return
+    
+    func getSession(before sessionID: UUID) async -> ConfSession? {
+        let sessions = await fetchSwiftDataSessions().sorted(by: { $0.startTime < $1.startTime })
+        
+        guard let currentIndex = sessions.firstIndex(where: { $0.id == sessionID }),
+              currentIndex > 0 else {
+            return nil // No session before the current session
         }
+        
+        return sessions[currentIndex - 1]
+    }
+    
+    func getSession(after sessionID: UUID) async -> ConfSession? {
+        let sessions = await fetchSwiftDataSessions().sorted(by: { $0.startTime < $1.startTime })
+        
+        guard let currentIndex = sessions.firstIndex(where: { $0.id == sessionID }),
+              currentIndex < sessions.count - 1 else {
+            return nil // No session after the current session
+        }
+        
+        return sessions[currentIndex + 1]
+    }
+}
 
+// MARK: - Speaker Methods
+extension ConfSessionManager {
+    func fetchSpeakers() async -> [Speaker] {
+        return await fetchSwiftDataSpeakers()
+    }
+    
+    func fetchSpeaker(id: UUID) async throws -> Speaker? {
         do {
-            let modelContext = ModelContext.main
-            try await modelContext.perform {
-                modelContext.insert(session)
-                try modelContext.save()
+            let sessions = try modelContext?.fetch(FetchDescriptor<Speaker>())
+            guard let session = sessions?.first(where: { $0.id == id }) else {
+                throw ConfSessionError.unableToFetch
             }
+            return session
         } catch {
-            print("Failed to add session to SwiftData: \(error)")
+            throw ConfSessionError.unableToFetch
         }
     }
-
-    /// Deletes a session from the data source
-    func deleteSession(_ session: ConfSession) async {
-        guard !useMockData else {
-            print("Mock mode enabled, changes won't be saved.")
-            return
+    
+    func fetchSpeakers(with identifiers: [UUID]) async -> [Speaker] {
+        let speakers = await fetchSwiftDataSpeakers()
+        return speakers.compactMap { speaker in
+            return identifiers.contains(speaker.id) ? speaker : nil
+            
+        }
+    }
+    
+    /// Fetches sessions from SwiftData
+    private func fetchSwiftDataSpeakers() async -> [Speaker] {
+        guard let modelContext else {
+            print("ModelContext is not available.")
+            return []
         }
 
         do {
-            let modelContext = ModelContext.main
-            try await modelContext.perform {
-                modelContext.delete(session)
-                try modelContext.save()
-            }
+            let fetchRequest = FetchDescriptor<Speaker>() // Updated for SwiftData
+            return try modelContext.fetch(fetchRequest)
         } catch {
-            print("Failed to delete session from SwiftData: \(error)")
+            print("Failed to fetch sessions from SwiftData: \(error)")
+            return []
         }
     }
 }

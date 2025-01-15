@@ -10,7 +10,9 @@ import SwiftData
 
 struct GetAllSessionsIntent: AppIntent {
     static var title: LocalizedStringResource = "Get All Sessions"
-    static var description: IntentDescription = "Get All Sessions with details."
+    static var description = IntentDescription("Get all sessions with details",
+        categoryName: "Session"
+    )
     static var openAppWhenRun: Bool = false
 
     func perform() async throws -> some IntentResult & ReturnsValue<[SessionEntity]?> {

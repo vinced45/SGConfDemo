@@ -7,26 +7,49 @@
 
 import SwiftUI
 import SwiftData
+import AppIntents
+
+fileprivate let modelContainer: ModelContainer = {
+    let schema = Schema([
+        ConfSession.self,
+        Speaker.self
+    ])
+    let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+
+    do {
+        return try ModelContainer(for: schema, configurations: [modelConfiguration])
+    } catch {
+        fatalError("Could not create ModelContainer: \(error)")
+    }
+}()
 
 @main
 struct SGConfDemoApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    init() {
+        let appSessionState = AppState()
+        self.appState = appSessionState
+        AppDependencyManager.shared.add(dependency: appSessionState)
+        
+        SessionAppShortcuts.updateAppShortcutParameters()
+    }
+    
+    @State private var appState: AppState
 
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .onOpenURL { url in
+                    guard url.scheme == "sgconf" else { return }
+                    print(url.lastPathComponent)
+                    guard let id = UUID(uuidString: url.lastPathComponent) else { return }
+                    if appState.path.count > 0 {
+                        appState.clear()
+                    }
+                    appState.path.append(id)
+                }
+                .environment(appState)
         }
-        .modelContainer(sharedModelContainer)
+        .modelContainer(modelContainer)
     }
+
 }

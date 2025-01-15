@@ -1,3 +1,13 @@
+//
+//  SessionQuery.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
+
+import AppIntents
+import SwiftUI
+
 struct SessionQuery: EntityQuery {
     // Provide the list of options you want to show the user, when they select the Entity in the shortcut. You probably want to show all items you have from your array.
     func suggestedEntities() async throws -> [SessionEntity] {

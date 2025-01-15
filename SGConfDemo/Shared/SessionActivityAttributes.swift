@@ -8,12 +8,15 @@
 import ActivityKit
 import SwiftUI
 
-struct SessionActivityAttributes: ActivityAttributes {
+public struct SessionActivityAttributes: ActivityAttributes {
     public struct ContentState: Codable, Hashable {
+        var sessionID: UUID
         var sessionTitle: String
         var sessionStartTime: Date
         var sessionEndTime: Date
+        var speakerName: String
+        var speakerImageFileName: String
+        var isFavorite: Bool
     }
-
-    var sessionName: String
+    var type: String = "sessionActivity"
 }

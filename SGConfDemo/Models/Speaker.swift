@@ -1,5 +1,14 @@
+//
+//  Speaker.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
+import Foundation
+import SwiftData
+
 @Model
-class Speaker {
+final class Speaker {
     @Attribute(.unique) var id: UUID
     var name: String
     var bio: String
@@ -12,3 +21,5 @@ class Speaker {
         self.photoURL = photoURL
     }
 }
+
+extension Speaker: Identifiable, Sendable {}

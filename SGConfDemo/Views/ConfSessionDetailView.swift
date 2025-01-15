@@ -2,10 +2,12 @@ import SwiftUI
 import ActivityKit
 
 struct ConfSessionDetailView: View {
-    let session: ConfSession
+    @Bindable var session: ConfSession
     @Environment(\.modelContext) private var modelContext
+    @Environment(AppState.self) private var appState
     
     var body: some View {
+        @Bindable var appState = appState
         ScrollView {
             VStack(alignment: .center, spacing: 16) {
                 Text(session.title)
@@ -87,6 +89,10 @@ struct ConfSessionDetailView: View {
         }
         .navigationTitle("Session Details")
         .navigationBarTitleDisplayMode(.inline)
+        .onAppear {
+            LiveActivityManager.update(session: session)
+            appState.currentSession = session
+        }
         .toolbar {
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button(action: toggleFavorite) {
@@ -97,10 +103,11 @@ struct ConfSessionDetailView: View {
         }
     }
     
-    // Toggle favorite status and save changes
     private func toggleFavorite() {
-        session.isFavorite.toggle()
-        try? modelContext.save() // Persist the change
+        withAnimation {
+            session.isFavorite.toggle()
+            try? modelContext.save()
+        }
     }
 
     private func startLiveActivity() {

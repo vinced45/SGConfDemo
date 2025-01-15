@@ -8,73 +8,89 @@
 import ActivityKit
 import WidgetKit
 import SwiftUI
+import AppIntents
 
-struct SGConfDemoWidgetAttributes: ActivityAttributes {
-    public struct ContentState: Codable, Hashable {
-        // Dynamic stateful properties about your activity go here!
-        var emoji: String
-    }
-
-    // Fixed non-changing properties about your activity go here!
-    var name: String
-}
-
-struct SGConfDemoWidgetLiveActivity: Widget {
+struct SGConfDemoLiveActivity: Widget {
     var body: some WidgetConfiguration {
-        ActivityConfiguration(for: SGConfDemoWidgetAttributes.self) { context in
-            // Lock screen/banner UI goes here
-            VStack {
-                Text("Hello \(context.state.emoji)")
-            }
-            .activityBackgroundTint(Color.cyan)
-            .activitySystemActionForegroundColor(Color.black)
-
+        ActivityConfiguration(for: SessionActivityAttributes.self) { context in
+            // Lock Screen and Expanded View
+            LiveActivitySessionView(session: context.attributes,
+                                    state: context.state
+            )
         } dynamicIsland: { context in
             DynamicIsland {
                 // Expanded UI goes here.  Compose the expanded UI through
                 // various regions, like leading/trailing/center/bottom
                 DynamicIslandExpandedRegion(.leading) {
-                    Text("Leading")
+                    LiveActivitySessionView(session: context.attributes,
+                                            state: context.state
+                    )
+                    .dynamicLeading
                 }
                 DynamicIslandExpandedRegion(.trailing) {
-                    Text("Trailing")
+                    LiveActivitySessionView(session: context.attributes,
+                                            state: context.state
+                    )
+                    .dynamicTrailing
+                }
+                DynamicIslandExpandedRegion(.center) {
+                    LiveActivitySessionView(session: context.attributes,
+                                            state: context.state
+                    )
+                    .dynamicCenter
                 }
                 DynamicIslandExpandedRegion(.bottom) {
-                    Text("Bottom \(context.state.emoji)")
-                    // more content
+                    LiveActivitySessionView(session: context.attributes,
+                                            state: context.state
+                    )
+                    .dynamicBottom
                 }
             } compactLeading: {
-                Text("L")
+                LiveActivitySessionView(session: context.attributes,
+                                        state: context.state
+                )
+                .compactLeading
             } compactTrailing: {
-                Text("T \(context.state.emoji)")
+                LiveActivitySessionView(session: context.attributes,
+                                        state: context.state
+                )
+                .compactTrailing
             } minimal: {
-                Text(context.state.emoji)
+                LiveActivitySessionView(session: context.attributes,
+                                        state: context.state
+                )
+                .minimal
             }
-            .widgetURL(URL(string: "http://www.apple.com"))
-            .keylineTint(Color.red)
+            .widgetURL(
+                URL(string: "sgconf://sessions/\(context.state.sessionID.uuidString)")
+            )
         }
+        .supplementalActivityFamilies([.small, .medium])
     }
 }
 
-extension SGConfDemoWidgetAttributes {
-    fileprivate static var preview: SGConfDemoWidgetAttributes {
-        SGConfDemoWidgetAttributes(name: "World")
+extension SessionActivityAttributes {
+    fileprivate static var preview: SessionActivityAttributes {
+        SessionActivityAttributes()
     }
 }
 
-extension SGConfDemoWidgetAttributes.ContentState {
-    fileprivate static var smiley: SGConfDemoWidgetAttributes.ContentState {
-        SGConfDemoWidgetAttributes.ContentState(emoji: "😀")
-     }
-     
-     fileprivate static var starEyes: SGConfDemoWidgetAttributes.ContentState {
-         SGConfDemoWidgetAttributes.ContentState(emoji: "🤩")
+extension SessionActivityAttributes.ContentState {
+    fileprivate static var techniques: SessionActivityAttributes.ContentState {
+        SessionActivityAttributes.ContentState(
+            sessionID: UUID(),
+            sessionTitle: "Exploring Advanced Techniques",
+            sessionStartTime: Date(),
+            sessionEndTime: Calendar.current.date(byAdding: .hour, value: 1, to: Date())!, 
+            speakerName: "Vince",
+            speakerImageFileName: "",
+            isFavorite: false
+        )
      }
 }
 
-#Preview("Notification", as: .content, using: SGConfDemoWidgetAttributes.preview) {
-   SGConfDemoWidgetLiveActivity()
+#Preview("Notification", as: .content, using: SessionActivityAttributes.preview) {
+    SGConfDemoLiveActivity()
 } contentStates: {
-    SGConfDemoWidgetAttributes.ContentState.smiley
-    SGConfDemoWidgetAttributes.ContentState.starEyes
+    SessionActivityAttributes.ContentState.techniques
 }

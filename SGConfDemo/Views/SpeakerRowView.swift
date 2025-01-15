@@ -1,3 +1,11 @@
+//
+//  SpeakerRowView.swift
+//  SGConfDemo
+//
+//  Created by Vince Davis on 1/15/25.
+//
+import SwiftUI
+
 struct SpeakerRowView: View {
     var speaker: Speaker
     
