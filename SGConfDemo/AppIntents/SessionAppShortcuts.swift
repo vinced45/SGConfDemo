@@ -15,9 +15,9 @@ struct SessionAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: OpenSpeakerIntent(),
             phrases: [
-                "Open Speaker in \(.applicationName)",
-                "Show Speaker \(\.$targetSpeaker) in \(.applicationName)",
-                "Open speaker \(\.$targetSpeaker) in \(.applicationName)"
+                "Open Speaker for \(.applicationName)",
+                "Show Speaker \(\.$targetSpeaker) for \(.applicationName)",
+                "Open speaker \(\.$targetSpeaker) for \(.applicationName)"
             ],
             shortTitle: "Open Speaker",
             systemImageName: "person.fill"
@@ -26,7 +26,7 @@ struct SessionAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: ToggleFavoriteCurrentSessionIntent(),
             phrases: [
-                "Favorite this session in \(.applicationName)"
+                "Favorite this session for \(.applicationName)"
             ],
             shortTitle: "Favorite Session",
             systemImageName: "star"
@@ -35,10 +35,10 @@ struct SessionAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: OpenSessionIntent(),
             phrases: [
-                "Open Session in \(.applicationName)",
-                "Show Session in \(.applicationName)",
-                "Open \(\.$targetSession) Session in \(.applicationName)",
-                "Show \(\.$targetSession) Session in \(.applicationName)"
+                "Open Session for \(.applicationName)",
+                "Show Session for \(.applicationName)",
+                "Open \(\.$targetSession) Session for \(.applicationName)",
+                "Show \(\.$targetSession) Session for \(.applicationName)"
             ],
             shortTitle: "Open Session",
             systemImageName: "music.microphone"
