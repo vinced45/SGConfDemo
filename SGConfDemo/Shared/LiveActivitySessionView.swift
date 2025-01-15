@@ -38,8 +38,7 @@ public extension LiveActivitySessionView {
                         .aspectRatio(contentMode: .fill)
                         .frame(width: 50, height: 50)
                         .clipShape(Circle())
-                } else if let asset = state.speakerName.split(separator: " ").first
-                {
+                } else if let asset = state.speakerName.split(separator: " ").first {
                     Image(asset.lowercased())
                         .resizable()
                         .aspectRatio(contentMode: .fill)
@@ -88,7 +87,7 @@ public extension LiveActivitySessionView {
             }
         }
         .padding()
-        //.background(Style.orange)
+        .background(Color.gray)
         //.activityBackgroundTint(Style.orange)
         .widgetURL(
             URL(string: "sgconf://sessions/\(state.sessionID.uuidString)")
@@ -116,8 +115,7 @@ public extension LiveActivitySessionView {
             })
         }
         .padding(5)
-        .background(Style.orange)
-        //.activityBackgroundTint(Style.orange)
+        .background(Color.gray)
         .widgetURL(
             URL(string: "sgconf://sessions/\(state.sessionID.uuidString)")
         )
@@ -125,17 +123,30 @@ public extension LiveActivitySessionView {
     
     @ViewBuilder
     var compactLeading: some View {
-        Text(state.sessionTitle.prefix(3))
+        if let asset = state.speakerName.split(separator: " ").first {
+            Image(asset.lowercased())
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 26, height: 26)
+                .clipShape(Circle())
+        }
     }
     
     @ViewBuilder
     var compactTrailing: some View {
         Text(state.sessionStartTime, style: .relative)
+            .foregroundStyle(.white)
     }
     
     @ViewBuilder
     var minimal: some View {
-        Text("🔵")
+        if let asset = state.speakerName.split(separator: " ").first {
+            Image(asset.lowercased())
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 26, height: 26)
+                .clipShape(Circle())
+        }
     }
     
     @ViewBuilder
@@ -212,11 +223,11 @@ public extension LiveActivitySessionView {
 extension LiveActivitySessionView {
     func getSession() -> ConfSession {
         ConfSession(id: state.sessionID,
-                    title: "",
+                    title: "Swift Test",
                     startTime: Date(),
                     endTime: Date(),
                     desc: "",
-                    speaker: nil)
+                    speaker: .carola)
     }
     
     func getEntity() -> SessionEntity {

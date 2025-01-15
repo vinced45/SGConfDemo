@@ -11,16 +11,11 @@ struct SpeakerRowView: View {
     
     var body: some View {
         HStack(spacing: 16) {
-            AsyncImage(url: URL(string: speaker.photoURL)) { image in
-                image.resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 50, height: 50)
-                    .clipShape(Circle())
-            } placeholder: {
-                Circle()
-                    .fill(Color.gray.opacity(0.3))
-                    .frame(width: 50, height: 50)
-            }
+            Image(speaker.name.split(separator: " ").first!.lowercased())
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: 50, height: 50)
+                .clipShape(Circle())
             VStack(alignment: .leading, spacing: 4) {
                 Text(speaker.name)
                     .font(.headline)

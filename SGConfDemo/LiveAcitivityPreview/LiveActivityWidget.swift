@@ -4,8 +4,6 @@
 //
 //  Created by Vince Davis on 1/12/25.
 //
-
-
 import Foundation
 import SwiftUI
 
@@ -72,37 +70,6 @@ enum LiveActivityWidget {
         case .watch49mm: return "Watch 49mm"
         }
     }
-
-//    var widget: some View {
-//        switch self {
-//        case .dynamicIslandCompactSmall:
-//            <#code#>
-//        case .dynamicIslandCompactLarge:
-//            <#code#>
-//        case .dynamicIslandMinimalSmall:
-//            <#code#>
-//        case .dynamicIslandMinimalLarge:
-//            <#code#>
-//        case .iphoneSmall:
-//            <#code#>
-//        case .iphoneLarge:
-//            <#code#>
-//        case .ipadSmall:
-//            <#code#>
-//        case .ipadLarge:
-//            <#code#>
-//        case .watch40mm:
-//            <#code#>
-//        case .watch41mm:
-//            <#code#>
-//        case .watch44mm:
-//            <#code#>
-//        case .watch45mm:
-//            <#code#>
-//        case .watch49mm:
-//            <#code#>
-//        }
-//    }
 
     var size: CGSize {
         switch self {

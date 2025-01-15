@@ -17,7 +17,6 @@ struct SessionAppShortcuts: AppShortcutsProvider {
             phrases: [
                 "Open Speaker for \(.applicationName)",
                 "Show Speaker \(\.$targetSpeaker) for \(.applicationName)",
-                "Open speaker \(\.$targetSpeaker) for \(.applicationName)"
             ],
             shortTitle: "Open Speaker",
             systemImageName: "person.fill"
@@ -35,10 +34,8 @@ struct SessionAppShortcuts: AppShortcutsProvider {
         AppShortcut(
             intent: OpenSessionIntent(),
             phrases: [
-                "Open Session for \(.applicationName)",
                 "Show Session for \(.applicationName)",
                 "Open \(\.$targetSession) Session for \(.applicationName)",
-                "Show \(\.$targetSession) Session for \(.applicationName)"
             ],
             shortTitle: "Open Session",
             systemImageName: "music.microphone"

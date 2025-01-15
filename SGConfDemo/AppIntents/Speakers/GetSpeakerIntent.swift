@@ -21,7 +21,8 @@ struct GetSpeakerIntent: AppIntent {
 
     func perform() async throws -> some IntentResult & ProvidesDialog & ShowsSnippetView & ReturnsValue<SpeakerEntity?> {
         return .result(value: targetSpeaker,
-                       dialog: "\(targetSpeaker.name) is \(targetSpeaker.bio) ")
+                       dialog: "\(targetSpeaker.name) is \(targetSpeaker.bio) ",
+                       view: SpeakerRowView(speaker: targetSpeaker.data))
     }
     
     static var parameterSummary: any ParameterSummary {
