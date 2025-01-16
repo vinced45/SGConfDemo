@@ -41,7 +41,26 @@ struct MockData {
         .swiftConcurrencyPart2,
         .bulidingHyper,
         .userdefaults,
-        .sideEffects
+        .sideEffects,
+        .bluetooth,
+        .snowglobe,
+        .innovation,
+        .reducing,
+        .justPort,
+        .scaling,
+        .cloudKit,
+        .standOut,
+        .final,
+        .shrinking,
+        .wrong,
+        .journey,
+        .contextAware,
+        .appIntents,
+        .automate,
+        .softSkills,
+        .testing,
+        .bringnin3D,
+        .memorable
     ]
     
     func seedMockDataIfNeeded(using context: ModelContext) {

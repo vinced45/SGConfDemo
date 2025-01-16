@@ -87,7 +87,7 @@ public extension LiveActivitySessionView {
             }
         }
         .padding()
-        .background(Color.gray)
+        //.background(Color.secondary)
         //.activityBackgroundTint(Style.orange)
         .widgetURL(
             URL(string: "sgconf://sessions/\(state.sessionID.uuidString)")
@@ -115,7 +115,7 @@ public extension LiveActivitySessionView {
             })
         }
         .padding(5)
-        .background(Color.gray)
+        //.background(Color.secondary)
         .widgetURL(
             URL(string: "sgconf://sessions/\(state.sessionID.uuidString)")
         )

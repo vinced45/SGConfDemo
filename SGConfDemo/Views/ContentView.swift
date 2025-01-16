@@ -17,6 +17,7 @@ struct ContentView: View {
     @Query(sort: \Speaker.name) private var speakers: [Speaker]
     
     let liveActivityLink: UUID = .init()
+    let iCloudShortcutsLink: UUID = .init()
     
     var body: some View {
         @Bindable var appState = appState
@@ -30,6 +31,8 @@ struct ContentView: View {
                 speakerSection
                 
                 liveActivitySection
+                
+                iCloudShortcutsSection
                 
                 shortcutsSection
             }
@@ -78,6 +81,8 @@ extension ContentView {
                               sessions: sessions.filter({$0.speaker == speaker }))
         } else if value == liveActivityLink {
             LiveActivityPreviewView()
+        } else if value == iCloudShortcutsLink {
+            CloudShortcutsView()
         } else {
             Text("Item not found.")
                 .font(.title2)
@@ -209,6 +214,20 @@ extension ContentView {
                 value: liveActivityLink,
                 label: {
                     Label("Live Activity Preview", systemImage: "bolt.square")
+                        .font(.headline)
+                        .padding(.vertical, 4)
+                }
+            )
+        }
+    }
+    
+    @ViewBuilder
+    var iCloudShortcutsSection: some View {
+        Section(header: Text("iCloud Shortcuts").font(.title2).bold()) {
+            NavigationLink(
+                value: iCloudShortcutsLink,
+                label: {
+                    Label("iCloud Shortcuts", systemImage: "cloud.fill")
                         .font(.headline)
                         .padding(.vertical, 4)
                 }

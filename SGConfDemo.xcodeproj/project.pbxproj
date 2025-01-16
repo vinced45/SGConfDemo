@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6101CB342D38DB7F00E31AB1 /* CloudShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */; };
 		61264D6A2D34D044009B2715 /* LiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D692D34D044009B2715 /* LiveActivityWidget.swift */; };
 		61264D6C2D34D110009B2715 /* LiveActivityPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D6B2D34D110009B2715 /* LiveActivityPreviewView.swift */; };
 		61264D6E2D3520E2009B2715 /* LiveActivitySessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D6D2D3520E2009B2715 /* LiveActivitySessionView.swift */; };
@@ -130,6 +131,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudShortcutsView.swift; sourceTree = "<group>"; };
 		61264D692D34D044009B2715 /* LiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityWidget.swift; sourceTree = "<group>"; };
 		61264D6B2D34D110009B2715 /* LiveActivityPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityPreviewView.swift; sourceTree = "<group>"; };
 		61264D6D2D3520E2009B2715 /* LiveActivitySessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitySessionView.swift; sourceTree = "<group>"; };
@@ -295,6 +297,7 @@
 				6191AD112D34A1C400047801 /* ContentView.swift */,
 				6191AD102D34A1C400047801 /* ConfSessionDetailView.swift */,
 				6191AD352D34BE4700047801 /* SpeakerDetailView.swift */,
+				6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */,
 				61264D8D2D36EED0009B2715 /* SessionRowView.swift */,
 				61264DCD2D37C81F009B2715 /* SpeakerRowView.swift */,
 			);
@@ -623,6 +626,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6191AD2E2D34B53D00047801 /* ConfSessionManager.swift in Sources */,
+				6101CB342D38DB7F00E31AB1 /* CloudShortcutsView.swift in Sources */,
 				61264DBC2D379ABD009B2715 /* OpenSpeakerIntent.swift in Sources */,
 				6191AD1D2D34A1C400047801 /* ConfSessionDetailView.swift in Sources */,
 				61264DA62D378EE6009B2715 /* SessionQuery+EntityStringQuery.swift in Sources */,

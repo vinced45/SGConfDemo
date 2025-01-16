@@ -23,15 +23,6 @@ struct SessionAppShortcuts: AppShortcutsProvider {
         )
         
         AppShortcut(
-            intent: SpeakCurrentSessionIntent(),
-            phrases: [
-                "Give session details for \(.applicationName)"
-            ],
-            shortTitle: "Speak about current session",
-            systemImageName: "speaker.wave.2.fill"
-        )
-        
-        AppShortcut(
             intent: OpenSpeakerIntent(),
             phrases: [
                 "Open Speaker for \(.applicationName)",
@@ -66,16 +57,6 @@ struct SessionAppShortcuts: AppShortcutsProvider {
                 "Get session in \(.applicationName)"
             ],
             shortTitle: "Get Session",
-            systemImageName: "calendar"
-        )
-        
-        AppShortcut(
-            intent: GetNextSessionIntent(),
-            phrases: [
-                "Get next session in \(.applicationName)",
-                "What’s my next session in \(.applicationName)"
-            ],
-            shortTitle: "Next Session",
             systemImageName: "calendar"
         )
     }
