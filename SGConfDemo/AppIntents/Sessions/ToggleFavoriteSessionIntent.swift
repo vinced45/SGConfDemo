@@ -12,6 +12,13 @@ import SwiftUI
 import WidgetKit
 
 struct ToggleFavoriteSessionIntent: AppIntent, LiveActivityIntent {
+    static var title: LocalizedStringResource = "Toggle Favorite Session"
+    static var description = IntentDescription(
+        "Toggles the favorite status of a given session.",
+        categoryName: "Session"
+    )
+    static var isDiscoverable: Bool = false
+    
     var sessionID: String
     
     init() {
@@ -21,28 +28,19 @@ struct ToggleFavoriteSessionIntent: AppIntent, LiveActivityIntent {
     init (sessionID: String) {
         self.sessionID = sessionID
     }
-    
-    static var title: LocalizedStringResource = "Toggle Favorite Session"
-    static var description = IntentDescription(
-        "Toggles the favorite status of a given session.",
-        categoryName: "Session"
-    )
 
     func perform() async throws -> some IntentResult {
-        // Fetch session by ID
         let manager = ConfSessionManager()
         let id = UUID(uuidString: sessionID) ?? UUID()
         guard let session = try await manager.fetchSession(id: id) else {
             return .result()
         }
-        try await manager.toggleFavorite(for: session)
+        try await manager.toggleFavorite(id: id)
         
         if LiveActivityManager.isLiveActivityActive() {
             LiveActivityManager.update(session: session)
         }
         
-        WidgetCenter.shared.reloadAllTimelines()
-
         return .result()
     }
 }

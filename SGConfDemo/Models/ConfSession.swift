@@ -30,3 +30,9 @@ final class ConfSession {
 }
 
 extension ConfSession: Identifiable, Sendable {}
+
+extension ConfSession {
+    var entity: SessionEntity {
+        .init(session: self)
+    }
+}

@@ -5,13 +5,6 @@
 //  Created by Vince Davis on 1/12/25.
 //
 
-//
-//  SGConfDemoWidget.swift
-//  SGConfDemoWidget
-//
-//  Created by Vince Davis on 1/12/25.
-//
-
 import WidgetKit
 import SwiftUI
 
@@ -20,44 +13,32 @@ struct Provider: AppIntentTimelineProvider {
         SimpleEntry(date: Date(), id: UUID(), sessionTitle: "Sample Session", speakerName: "John Doe", startTime: Date(), isFavorite: true)
     }
 
-    func snapshot(for configuration: ConfigurationAppIntent, in context: Context) async -> SimpleEntry {
-        let session = await ConfSessionManager().fetchSessions().first
+    func snapshot(for configuration: ConfigurationSessionAppIntent, in context: Context) async -> SimpleEntry {
+         let session = try! await ConfSessionManager().fetchSession(id: configuration.targetSession?.data.id ?? UUID())
         return SimpleEntry(
             date: Date(),
             id: session?.id ?? UUID(),
-            sessionTitle: session?.title ?? "No Sessions",
+            sessionTitle: session?.title ?? "Unknown Session",
             speakerName: session?.speaker?.name ?? "Unknown Speaker",
             startTime: session?.startTime ?? Date(),
             isFavorite: session?.isFavorite ?? false
         )
     }
     
-    func timeline(for configuration: ConfigurationAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
+    func timeline(for configuration: ConfigurationSessionAppIntent, in context: Context) async -> Timeline<SimpleEntry> {
         var entries: [SimpleEntry] = []
         let currentDate = Date()
-
-        for hourOffset in 0 ..< 5 {
-            let session = await ConfSessionManager().fetchSessions().first
-            let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
-            let entry = SimpleEntry(
-                date: entryDate,
-                id: session?.id ?? UUID(),
-                sessionTitle: session?.title ?? "No Sessions",
-                speakerName: session?.speaker?.name ?? "Unknown Speaker",
-                startTime: session?.startTime ?? Date(),
-                isFavorite: session?.isFavorite ?? false
-            )
-            entries.append(entry)
-        }
-
+        let session = try! await ConfSessionManager().fetchSession(id: configuration.targetSession?.data.id ?? UUID())
+        let entry = SimpleEntry(
+            date: currentDate,
+            id: session?.id ?? UUID(),
+            sessionTitle: session?.title ?? "Unknown Session",
+            speakerName: session?.speaker?.name ?? "Unknown Speaker",
+            startTime: session?.startTime ?? Date(),
+            isFavorite: session?.isFavorite ?? false
+        )
+        entries.append(entry)
         return Timeline(entries: entries, policy: .atEnd)
-    }
-
-    private func fetchNextSession() async -> ConfSession? {
-        // Use the GetNextSessionIntent to fetch the next session
-        let intent = GetNextSessionIntent()
-        let result = try? await intent.perform()
-        return .bulidingHyper
     }
 }
 
@@ -116,13 +97,30 @@ struct SGConfDemoWidgetEntryView: View {
                 Spacer()
                 
                 // Favorite Button
-                Button(intent: ToggleFavoriteSessionIntent(sessionID: entry.id.uuidString)) {
+                Button(intent: SetFavoriteSessionIntent(entity: getEntity())) {
                     Image(systemName: entry.isFavorite ? "star.fill" : "star")
                         .foregroundColor(entry.isFavorite ? .yellow : .gray)
                 }
             }
         }
         .padding()
+        .containerBackground(Color.white, for: .widget)
+        .widgetURL(
+            URL(string: "sgconf://sessions/\(entry.id.uuidString)")
+        )
+    }
+}
+
+extension SGConfDemoWidgetEntryView {
+    func getEntity() -> SessionEntity {
+        SessionEntity(
+            session: .init(
+                id: entry.id,
+                title: entry.sessionTitle,
+                startTime: entry.startTime,
+                endTime: entry.startTime,
+                desc: "", speaker: .jane)
+        )
     }
 }
 
@@ -130,8 +128,11 @@ struct SGConfDemoWidget: Widget {
     let kind: String = "SGConfDemoWidget"
 
     var body: some WidgetConfiguration {
-        AppIntentConfiguration(kind: kind, intent: ConfigurationAppIntent.self, provider: Provider()) { entry in
-            SGConfDemoWidgetEntryView(entry: entry)
+        AppIntentConfiguration(
+            kind: kind,
+            intent: ConfigurationSessionAppIntent.self,
+            provider: Provider()) { entry in
+                SGConfDemoWidgetEntryView(entry: entry)
         }
     }
 }

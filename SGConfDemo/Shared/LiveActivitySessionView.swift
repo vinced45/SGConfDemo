@@ -18,9 +18,9 @@ public struct LiveActivitySessionView: View {
     
     public var body: some View {
         switch activityFamily {
-        case .small: AnyView(watchView)
-        case .medium: AnyView(phoneView)
-        default: AnyView(phoneView)
+        case .small: watchView
+        case .medium: phoneView
+        default: phoneView
         }
     }
 }
@@ -74,7 +74,7 @@ public extension LiveActivitySessionView {
             Spacer()
             
             VStack(alignment: .trailing, spacing: 8) {
-                Button(intent: ToggleFavoriteSessionIntent(sessionID: state.sessionID.uuidString), label: {
+                Button(intent: SetFavoriteSessionIntent(entity: getEntity()), label: {
                     Image(systemName: state.isFavorite ? "star.fill" : "star")
                         .foregroundColor(state.isFavorite ? .yellow : .gray)
                 })
@@ -109,7 +109,7 @@ public extension LiveActivitySessionView {
             
             Spacer()
             
-            Button(intent: ToggleFavoriteSessionIntent(sessionID: state.sessionID.uuidString), label: {
+            Button(intent: SetFavoriteSessionIntent(entity: getEntity()), label: {
                 Image(systemName: state.isFavorite ? "star.fill" : "star")
                     .foregroundColor(state.isFavorite ? .yellow : .gray)
             })
@@ -197,7 +197,7 @@ public extension LiveActivitySessionView {
                         .frame(width: 50, height: 50)
                 }
                                 
-                Button(intent: ToggleFavoriteSessionIntent(sessionID: state.sessionID.uuidString), label: {
+                Button(intent: SetFavoriteSessionIntent(entity: getEntity()), label: {
                     Image(systemName: state.isFavorite ? "star.fill" : "star")
                         .foregroundColor(state.isFavorite ? .yellow : .gray)
                 })

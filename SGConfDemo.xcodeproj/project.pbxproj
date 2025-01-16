@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6101CB342D38DB7F00E31AB1 /* CloudShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */; };
+		6101CB362D394D6100E31AB1 /* SetFavoriteSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */; };
+		6101CB372D394D6100E31AB1 /* SetFavoriteSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */; };
 		61264D6A2D34D044009B2715 /* LiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D692D34D044009B2715 /* LiveActivityWidget.swift */; };
 		61264D6C2D34D110009B2715 /* LiveActivityPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D6B2D34D110009B2715 /* LiveActivityPreviewView.swift */; };
 		61264D6E2D3520E2009B2715 /* LiveActivitySessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D6D2D3520E2009B2715 /* LiveActivitySessionView.swift */; };
@@ -132,6 +134,7 @@
 
 /* Begin PBXFileReference section */
 		6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudShortcutsView.swift; sourceTree = "<group>"; };
+		6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFavoriteSessionIntent.swift; sourceTree = "<group>"; };
 		61264D692D34D044009B2715 /* LiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityWidget.swift; sourceTree = "<group>"; };
 		61264D6B2D34D110009B2715 /* LiveActivityPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityPreviewView.swift; sourceTree = "<group>"; };
 		61264D6D2D3520E2009B2715 /* LiveActivitySessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitySessionView.swift; sourceTree = "<group>"; };
@@ -192,7 +195,8 @@
 		61264D9A2D374F1F009B2715 /* Exceptions for "SGConfDemoWidget" folder in "SGConfDemo" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				SGConfDemoWidgetControl.swift,
+				ConfigurationSessionAppIntent.swift,
+				StartLiveActivityControl.swift,
 			);
 			target = 6191ACAC2D343BF400047801 /* SGConfDemo */;
 		};
@@ -324,6 +328,7 @@
 				61264DAE2D3799F0009B2715 /* GetAllSessionsIntent.swift */,
 				6191AD292D34B46300047801 /* GetNextSessionIntent.swift */,
 				61264DB42D379A3E009B2715 /* OpenSessionIntent.swift */,
+				6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */,
 				614DA5042D3851170099B622 /* SpeakCurrentSessionIntent.swift */,
 				614DA4FE2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift */,
 				61264D7D2D35AC08009B2715 /* ToggleFavoriteSessionIntent.swift */,
@@ -655,6 +660,7 @@
 				61264D952D370D66009B2715 /* AppState.swift in Sources */,
 				61264DB02D3799F0009B2715 /* GetAllSessionsIntent.swift in Sources */,
 				61264D712D358133009B2715 /* Speaker+MockData.swift in Sources */,
+				6101CB362D394D6100E31AB1 /* SetFavoriteSessionIntent.swift in Sources */,
 				614DA4FF2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift in Sources */,
 				61264DC22D379C8C009B2715 /* GetSpeakerIntent.swift in Sources */,
 				61264DA12D378E35009B2715 /* SpeakerEntity.swift in Sources */,
@@ -702,6 +708,7 @@
 				61264D822D35BD83009B2715 /* StyleHelper.swift in Sources */,
 				61264DBF2D379C16009B2715 /* SpeakerQuery.swift in Sources */,
 				61264D862D36CE96009B2715 /* Speaker.swift in Sources */,
+				6101CB372D394D6100E31AB1 /* SetFavoriteSessionIntent.swift in Sources */,
 				61264D942D370D66009B2715 /* AppState.swift in Sources */,
 				61264D9E2D378E28009B2715 /* SessionEntity.swift in Sources */,
 				61264D892D36CEAF009B2715 /* ConfSession.swift in Sources */,

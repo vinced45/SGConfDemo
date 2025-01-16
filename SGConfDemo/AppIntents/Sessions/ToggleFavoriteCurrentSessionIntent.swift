@@ -26,9 +26,9 @@ struct ToggleFavoriteCurrentSessionIntent: AppIntent {
         }
         let intent = ToggleFavoriteSessionIntent(sessionID: session.id.uuidString)
         do {
-            try await intent.perform()
+            _ = try await intent.perform()
         }
-        
-        return .result(dialog: "Session \(session.title) is now \(session.isFavorite ? "favorite" : "not favorite")")
+        let updatedSession = try await ConfSessionManager().fetchSession(id: session.id)
+        return .result(dialog: "Session \(updatedSession?.title ?? "") is now \(updatedSession?.isFavorite ?? false ? "favorite" : "not favorite")")
     }
 }

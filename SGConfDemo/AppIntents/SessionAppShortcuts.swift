@@ -13,7 +13,7 @@ struct SessionAppShortcuts: AppShortcutsProvider {
     
     static var appShortcuts: [AppShortcut] {
         AppShortcut(
-            intent: StartSessionLiveActivityIntent(),
+            intent: SpeakSessionLiveActivityIntent(),
             phrases: [
                 "Start Live Activity for \(.applicationName)",
                 "Start Live Activity for \(\.$targetSession) Session for \(.applicationName)",
@@ -38,7 +38,7 @@ struct SessionAppShortcuts: AppShortcutsProvider {
                 "Favorite this session for \(.applicationName)"
             ],
             shortTitle: "Favorite Session",
-            systemImageName: "star"
+            systemImageName: "star.fill"
         )
         
         AppShortcut(

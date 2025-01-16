@@ -52,15 +52,10 @@ struct GetNextSessionIntent: AppIntent, LiveActivityIntent {
             dialog = "Your next session is '\(nextSession.title)', starting at \(nextSession.startTime.formatted())."
             session = nextSession
         }
-        LiveActivityManager.updateLiveActivity(
-            id: session.id,
-            sessionName: session.title,
-            startTime: session.startTime,
-            endTime: session.endTime,
-            speaker: session.speaker?.name ?? "",
-            imageUrl: session.speaker?.photoURL ?? "",
-            isFavorite: session.isFavorite)
+        LiveActivityManager.update(session: session)
         
         return .result(dialog: IntentDialog(stringLiteral: dialog))
     }
 }
+
+

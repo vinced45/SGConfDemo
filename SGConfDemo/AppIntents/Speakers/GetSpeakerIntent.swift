@@ -32,5 +32,3 @@ struct GetSpeakerIntent: AppIntent {
     @Dependency
     private var appState: AppState
 }
-
-

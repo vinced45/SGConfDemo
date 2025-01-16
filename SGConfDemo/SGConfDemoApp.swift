@@ -29,8 +29,6 @@ struct SGConfDemoApp: App {
         let appSessionState = AppState()
         self.appState = appSessionState
         AppDependencyManager.shared.add(dependency: appSessionState)
-        
-        SessionAppShortcuts.updateAppShortcutParameters()
     }
     
     @State private var appState: AppState

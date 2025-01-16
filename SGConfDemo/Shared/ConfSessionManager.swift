@@ -14,6 +14,8 @@ enum ConfSessionError: Error {
     case unexpected
     case unableToFetch
     case unableToSave
+    case unableToFind
+    case unableToCreateModelContext
 }
 
 fileprivate let modelContainer: ModelContainer = {
@@ -33,12 +35,13 @@ fileprivate let modelContainer: ModelContainer = {
 @Observable
 class ConfSessionManager {
     private var modelContext: ModelContext?
-    
-    var sessions: [ConfSession] = .init()
-    var speakers: [Speaker] = .init()
 
-    init() {
-        self.modelContext = ModelContext(modelContainer)
+    init(modelContext: ModelContext? = nil) {
+        if let context = modelContext {
+            self.modelContext = context
+        } else {
+            self.modelContext = ModelContext(modelContainer)
+        }
     }
 }
 
@@ -52,7 +55,7 @@ extension ConfSessionManager {
         do {
             let sessions = try modelContext?.fetch(FetchDescriptor<ConfSession>())
             guard let session = sessions?.first(where: { $0.id == id }) else {
-                throw ConfSessionError.unableToFetch
+                throw ConfSessionError.unableToFind
             }
             return session
         } catch {
@@ -64,19 +67,17 @@ extension ConfSessionManager {
         do {
             let sessions = try modelContext?.fetch(FetchDescriptor<ConfSession>())
             guard let session = sessions?.first(where: { $0.id == id }) else {
-                throw ConfSessionError.unableToSave
+                throw ConfSessionError.unableToFind
             }
             session.isFavorite.toggle()
             try modelContext?.save()
+        } catch {
+            throw ConfSessionError.unableToFetch
         }
     }
     
     func toggleFavorite(for session: ConfSession) async throws {
         do {
-//            let sessions = try modelContext?.fetch(FetchDescriptor<ConfSession>())
-//            guard let session = sessions?.first(where: { $0.id == id }) else {
-//                throw ConfSessionError.unableToSave
-//            }
             session.isFavorite.toggle()
             try modelContext?.save()
         } catch {
