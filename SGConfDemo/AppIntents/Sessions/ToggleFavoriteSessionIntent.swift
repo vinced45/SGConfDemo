@@ -9,8 +9,11 @@
 import AppIntents
 import SwiftData
 import SwiftUI
+import WidgetKit
 
 struct ToggleFavoriteSessionIntent: AppIntent, LiveActivityIntent {
+    var sessionID: String
+    
     init() {
         self.sessionID = ""
     }
@@ -25,19 +28,21 @@ struct ToggleFavoriteSessionIntent: AppIntent, LiveActivityIntent {
         categoryName: "Session"
     )
 
-    var sessionID: String
-
     func perform() async throws -> some IntentResult {
         // Fetch session by ID
         let manager = ConfSessionManager()
         let id = UUID(uuidString: sessionID) ?? UUID()
-        try await manager.toggleFavorite(id: id)
+        guard let session = try await manager.fetchSession(id: id) else {
+            return .result()
+        }
+        try await manager.toggleFavorite(for: session)
         
-        if let session = try await manager.fetchSession(id: id),
-           LiveActivityManager.isLiveActivityActive() {
+        if LiveActivityManager.isLiveActivityActive() {
             LiveActivityManager.update(session: session)
         }
-        //return .result(value: "\(session.title) is now \(session.isFavorite ? "favorited" : "unfavorited").")
+        
+        WidgetCenter.shared.reloadAllTimelines()
+
         return .result()
     }
 }

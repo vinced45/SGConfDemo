@@ -11,7 +11,7 @@ import SwiftUI
 @main
 struct SGConfDemoWidgetBundle: WidgetBundle {
     var body: some Widget {
-        //SGConfDemoWidget()
+        SGConfDemoWidget()
         StartLiveActivityControl()
         SGConfDemoLiveActivity()
     }

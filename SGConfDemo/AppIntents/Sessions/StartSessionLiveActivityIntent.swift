@@ -28,3 +28,5 @@ struct StartSessionLiveActivityIntent: AppIntent, LiveActivityIntent {
         Summary("Start Live Activity for \(\.$targetSession) Session", table: "Select a Session.")
     }
 }
+
+

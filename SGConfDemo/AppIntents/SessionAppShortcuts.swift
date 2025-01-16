@@ -18,8 +18,17 @@ struct SessionAppShortcuts: AppShortcutsProvider {
                 "Start Live Activity for \(.applicationName)",
                 "Start Live Activity for \(\.$targetSession) Session for \(.applicationName)",
             ],
-            shortTitle: "Sart Live Activity",
+            shortTitle: "Start Live Activity",
             systemImageName: "bolt.fill"
+        )
+        
+        AppShortcut(
+            intent: SpeakCurrentSessionIntent(),
+            phrases: [
+                "Give session details for \(.applicationName)"
+            ],
+            shortTitle: "Speak about current session",
+            systemImageName: "speaker.wave.2.fill"
         )
         
         AppShortcut(

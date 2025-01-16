@@ -9,7 +9,7 @@ import Observation
 import SwiftUI
 
 @Observable
-class AppState: ObservableObject {
+class AppState {
     var path: NavigationPath = .init()
     var currentSession: ConfSession?
     var currentSpeaker: Speaker?

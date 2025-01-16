@@ -11,13 +11,14 @@ import SwiftUI
 import SwiftData
 
 struct ToggleFavoriteCurrentSessionIntent: AppIntent {
+    @Dependency
+    private var appState: AppState
+    
     static var title: LocalizedStringResource = "Toggle favorite for current session"
     static var description = IntentDescription(
         "Toggles the favorite status of a given session.",
         categoryName: "Session"
     )
-//    @Parameter(title: "Session")
-//    var targetSession: ConfSession
 
     func perform() async throws -> some IntentResult & ProvidesDialog {
         guard let session = appState.currentSession else {
@@ -30,7 +31,4 @@ struct ToggleFavoriteCurrentSessionIntent: AppIntent {
         
         return .result(dialog: "Session \(session.title) is now \(session.isFavorite ? "favorite" : "not favorite")")
     }
-    
-    @Dependency
-    private var appState: AppState
 }

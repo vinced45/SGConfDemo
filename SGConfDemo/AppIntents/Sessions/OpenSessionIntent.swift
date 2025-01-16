@@ -9,6 +9,9 @@ import SwiftUI
 import SwiftData
 
 struct OpenSessionIntent: AppIntent {
+    @Dependency
+    private var appState: AppState
+    
     static var title: LocalizedStringResource = "Open Session"
     static var description = IntentDescription(
         "Open Session with details",
@@ -31,9 +34,4 @@ struct OpenSessionIntent: AppIntent {
     static var parameterSummary: any ParameterSummary {
         Summary("Open \(\.$targetSession)", table: "Select a Session.")
     }
-    
-    
-    
-    @Dependency
-    private var appState: AppState
 }

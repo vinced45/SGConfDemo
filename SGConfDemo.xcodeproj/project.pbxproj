@@ -65,6 +65,8 @@
 		614DA4FD2D380B230099B622 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 614DA4FC2D380B230099B622 /* README.md */; };
 		614DA4FF2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614DA4FE2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift */; };
 		614DA5002D383BFF0099B622 /* StartSessionLiveActivityIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614DA4FE2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift */; };
+		614DA5052D3851170099B622 /* SpeakCurrentSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614DA5042D3851170099B622 /* SpeakCurrentSessionIntent.swift */; };
+		614DA5062D3851170099B622 /* SpeakCurrentSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 614DA5042D3851170099B622 /* SpeakCurrentSessionIntent.swift */; };
 		6191ACE22D3492D600047801 /* SwiftData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6191ACE12D3492D600047801 /* SwiftData.framework */; };
 		6191ACEF2D34A06900047801 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6191ACEE2D34A06900047801 /* WidgetKit.framework */; };
 		6191ACF12D34A06900047801 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6191ACF02D34A06900047801 /* SwiftUI.framework */; };
@@ -159,6 +161,7 @@
 		614DA4F92D37F89A0099B622 /* TestSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestSession.swift; sourceTree = "<group>"; };
 		614DA4FC2D380B230099B622 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		614DA4FE2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartSessionLiveActivityIntent.swift; sourceTree = "<group>"; };
+		614DA5042D3851170099B622 /* SpeakCurrentSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeakCurrentSessionIntent.swift; sourceTree = "<group>"; };
 		6191ACAD2D343BF400047801 /* SG Demo 25.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SG Demo 25.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6191ACBF2D343BF500047801 /* SGConfDemoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SGConfDemoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6191ACC92D343BF500047801 /* SGConfDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SGConfDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -318,6 +321,7 @@
 				61264DAE2D3799F0009B2715 /* GetAllSessionsIntent.swift */,
 				6191AD292D34B46300047801 /* GetNextSessionIntent.swift */,
 				61264DB42D379A3E009B2715 /* OpenSessionIntent.swift */,
+				614DA5042D3851170099B622 /* SpeakCurrentSessionIntent.swift */,
 				614DA4FE2D383BFF0099B622 /* StartSessionLiveActivityIntent.swift */,
 				61264D7D2D35AC08009B2715 /* ToggleFavoriteSessionIntent.swift */,
 				61264DB72D379A95009B2715 /* ToggleFavoriteCurrentSessionIntent.swift */,
@@ -639,6 +643,7 @@
 				61264DB52D379A3E009B2715 /* OpenSessionIntent.swift in Sources */,
 				61264D7B2D3597ED009B2715 /* ImagerHelper.swift in Sources */,
 				61264D6A2D34D044009B2715 /* LiveActivityWidget.swift in Sources */,
+				614DA5062D3851170099B622 /* SpeakCurrentSessionIntent.swift in Sources */,
 				61264D9D2D378E28009B2715 /* SessionEntity.swift in Sources */,
 				61264D8E2D36EED0009B2715 /* SessionRowView.swift in Sources */,
 				6191AD202D34A1C400047801 /* MockData.swift in Sources */,
@@ -704,6 +709,7 @@
 				61264D792D358287009B2715 /* DateHelper.swift in Sources */,
 				61264D8F2D36EED1009B2715 /* SessionRowView.swift in Sources */,
 				61264D722D358133009B2715 /* Speaker+MockData.swift in Sources */,
+				614DA5052D3851170099B622 /* SpeakCurrentSessionIntent.swift in Sources */,
 				6191AD252D34A26500047801 /* SessionActivityAttributes.swift in Sources */,
 				61264DB62D379A3E009B2715 /* OpenSessionIntent.swift in Sources */,
 				6191AD342D34B82A00047801 /* SessionAppShortcuts.swift in Sources */,
@@ -881,6 +887,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vincedavis.SGConfDemo2;
 				PRODUCT_NAME = "SG Demo 25";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -913,6 +923,10 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.vincedavis.SGConfDemo2;
 				PRODUCT_NAME = "SG Demo 25";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -114,6 +114,9 @@ extension ContentView {
     @ViewBuilder
     var scheduleSection: some View {
         Section(header: Text("Schedule").font(.title2).bold()) {
+            SiriTipView(intent: OpenSessionIntent(), isVisible: .constant(true))
+                .listRowBackground(Color.clear)
+            
             ForEach(sessions, id: \.id) { session in
                 NavigationLink(
                     value: session.id,
@@ -165,6 +168,9 @@ extension ContentView {
     @ViewBuilder
     var speakerSection: some View {
         Section(header: Text("Speakers").font(.title2).bold()) {
+            SiriTipView(intent: OpenSpeakerIntent(), isVisible: .constant(true))
+                .listRowBackground(Color.clear)
+            
             ForEach(speakers, id: \.id) { speaker in
                 NavigationLink(
                     value: speaker.id,

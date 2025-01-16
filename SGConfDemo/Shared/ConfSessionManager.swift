@@ -71,6 +71,19 @@ extension ConfSessionManager {
         }
     }
     
+    func toggleFavorite(for session: ConfSession) async throws {
+        do {
+//            let sessions = try modelContext?.fetch(FetchDescriptor<ConfSession>())
+//            guard let session = sessions?.first(where: { $0.id == id }) else {
+//                throw ConfSessionError.unableToSave
+//            }
+            session.isFavorite.toggle()
+            try modelContext?.save()
+        } catch {
+            throw ConfSessionError.unableToSave
+        }
+    }
+    
     func fetchSessions(with identifiers: [UUID]) async -> [ConfSession] {
         let sessions = await fetchSwiftDataSessions()
         return sessions.compactMap { session in

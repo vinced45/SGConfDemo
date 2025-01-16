@@ -1,5 +1,6 @@
 import SwiftUI
 import ActivityKit
+import AppIntents
 
 struct ConfSessionDetailView: View {
     @Bindable var session: ConfSession
@@ -37,6 +38,8 @@ struct ConfSessionDetailView: View {
                 }
 
                 Divider()
+                
+                SiriTipView(intent: ToggleFavoriteCurrentSessionIntent(), isVisible: .constant(true))
 
                 VStack(alignment: .leading, spacing: 8) {
                     Text("Description")
