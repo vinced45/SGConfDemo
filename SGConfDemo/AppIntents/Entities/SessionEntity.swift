@@ -49,4 +49,3 @@ struct SessionEntity: AppEntity, Identifiable {
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Session"
     static var defaultQuery = SessionQuery()
 }
-
