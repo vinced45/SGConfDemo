@@ -10,6 +10,8 @@
 		6101CB342D38DB7F00E31AB1 /* CloudShortcutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */; };
 		6101CB362D394D6100E31AB1 /* SetFavoriteSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */; };
 		6101CB372D394D6100E31AB1 /* SetFavoriteSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */; };
+		6101CB3A2D39F6C200E31AB1 /* GetCurrentSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB392D39F6C200E31AB1 /* GetCurrentSessionIntent.swift */; };
+		6101CB3B2D39F6C200E31AB1 /* GetCurrentSessionIntent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101CB392D39F6C200E31AB1 /* GetCurrentSessionIntent.swift */; };
 		61264D6A2D34D044009B2715 /* LiveActivityWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D692D34D044009B2715 /* LiveActivityWidget.swift */; };
 		61264D6C2D34D110009B2715 /* LiveActivityPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D6B2D34D110009B2715 /* LiveActivityPreviewView.swift */; };
 		61264D6E2D3520E2009B2715 /* LiveActivitySessionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61264D6D2D3520E2009B2715 /* LiveActivitySessionView.swift */; };
@@ -135,6 +137,7 @@
 /* Begin PBXFileReference section */
 		6101CB332D38DB7F00E31AB1 /* CloudShortcutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudShortcutsView.swift; sourceTree = "<group>"; };
 		6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetFavoriteSessionIntent.swift; sourceTree = "<group>"; };
+		6101CB392D39F6C200E31AB1 /* GetCurrentSessionIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCurrentSessionIntent.swift; sourceTree = "<group>"; };
 		61264D692D34D044009B2715 /* LiveActivityWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityWidget.swift; sourceTree = "<group>"; };
 		61264D6B2D34D110009B2715 /* LiveActivityPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivityPreviewView.swift; sourceTree = "<group>"; };
 		61264D6D2D3520E2009B2715 /* LiveActivitySessionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveActivitySessionView.swift; sourceTree = "<group>"; };
@@ -324,9 +327,10 @@
 		61264DAB2D37900D009B2715 /* Sessions */ = {
 			isa = PBXGroup;
 			children = (
-				61264DB12D379A0D009B2715 /* GetSessionIntent.swift */,
 				61264DAE2D3799F0009B2715 /* GetAllSessionsIntent.swift */,
+				6101CB392D39F6C200E31AB1 /* GetCurrentSessionIntent.swift */,
 				6191AD292D34B46300047801 /* GetNextSessionIntent.swift */,
+				61264DB12D379A0D009B2715 /* GetSessionIntent.swift */,
 				61264DB42D379A3E009B2715 /* OpenSessionIntent.swift */,
 				6101CB352D394D6100E31AB1 /* SetFavoriteSessionIntent.swift */,
 				614DA5042D3851170099B622 /* SpeakCurrentSessionIntent.swift */,
@@ -673,6 +677,7 @@
 				61264D872D36CE96009B2715 /* Speaker.swift in Sources */,
 				61264D6C2D34D110009B2715 /* LiveActivityPreviewView.swift in Sources */,
 				61264D6F2D3520E2009B2715 /* LiveActivitySessionView.swift in Sources */,
+				6101CB3A2D39F6C200E31AB1 /* GetCurrentSessionIntent.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,6 +732,7 @@
 				61264D742D358179009B2715 /* ConfSession+MockData.swift in Sources */,
 				61264D7F2D35AC08009B2715 /* ToggleFavoriteSessionIntent.swift in Sources */,
 				61264DA42D378EA8009B2715 /* SessionQuery.swift in Sources */,
+				6101CB3B2D39F6C200E31AB1 /* GetCurrentSessionIntent.swift in Sources */,
 				6191AD302D34B56900047801 /* MockData.swift in Sources */,
 				61264DCB2D37A249009B2715 /* Direction.swift in Sources */,
 			);

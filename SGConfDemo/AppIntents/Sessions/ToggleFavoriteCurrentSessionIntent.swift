@@ -4,8 +4,6 @@
 //
 //  Created by Vince Davis on 1/15/25.
 //
-
-
 import AppIntents
 import SwiftUI
 import SwiftData
