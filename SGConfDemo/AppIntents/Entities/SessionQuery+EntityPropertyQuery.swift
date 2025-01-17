@@ -4,12 +4,10 @@
 //
 //  Created by Vince Davis on 1/15/25.
 //
-
 import AppIntents
 import SwiftUI
 
 extension SessionQuery: EntityPropertyQuery {
-    
     /**
      The type of the comparator to use for the property query. This sample uses `Predicate`, but other apps could use `NSPredicate` (for
      Core Data) or an entirely custom comparator that works with an existing data model.
@@ -32,25 +30,11 @@ extension SessionQuery: EntityPropertyQuery {
                 #Predicate<SessionEntity> { $0.name != searchValue }
             }
         }
-        
-//        Property(\TrailEntity.$trailLength) {
-//            LessThanOrEqualToComparator { searchValue in
-//                #Predicate<TrailEntity> { entity in
-//                    entity.trailLength <= searchValue
-//                }
-//            }
-//            GreaterThanOrEqualToComparator { searchValue in
-//                #Predicate<TrailEntity> { entity in
-//                    entity.trailLength >= searchValue
-//                }
-//            }
-//        }
     }
     
     /// Declare the entity properties available as sort criteria in the Find intent.
     static let sortingOptions = SortingOptions {
         SortableBy(\SessionEntity.$name)
-        //SortableBy(\TrailEntity.$trailLength)
     }
     
     /// The text that people see in the Shortcuts app, describing what this intent does.
@@ -74,8 +58,6 @@ extension SessionQuery: EntityPropertyQuery {
             switch sortOperation.by {
             case \.$name:
                 matchedSessions.sort(using: KeyPathComparator(\SessionEntity.name, order: sortOperation.order.sortOrder))
-//            case \.$trailLength:
-//                matchedTrails.sort(using: KeyPathComparator(\SessionEntity.trailLength, order: sortOperation.order.sortOrder))
             default:
                 break
             }

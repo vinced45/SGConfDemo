@@ -18,22 +18,12 @@ struct LiveActivityPreviewView: View {
 
     var body: some View {
         ScrollView {
-//            Group {
-//                Text("Light").bold().font(.title)
-//                ForEach(LiveActivityWidget.lightCases, id: \.self) {
-//                    laView($0, context: context)
-//                }
-//            }
-//            .background(.black)
-//            .environment(\.colorScheme, .light)
-
             VStack {
                 Picker("Context", selection: $currentSession) {
                     ForEach(TestSession.all) { session in
                         Text(session.state.sessionTitle).tag(session as TestSession)
                     }
                 }
-                Text("Dark").bold().font(.title)
 
                 ForEach(LiveActivityWidget.allCases, id: \.self) {
                     laView($0, session: currentSession)
@@ -97,6 +87,7 @@ struct LiveActivityPreviewView: View {
                 .phoneView
                 .frame(width: la.size.width, height: la.size.height)
                 .cornerRadius(20)
+                .background(Color.gray.opacity(0.4))
             case .watch40mm, .watch41mm, .watch44mm, .watch45mm, .watch49mm:
                 LiveActivitySessionView(
                     session: session.attribute,
@@ -105,6 +96,7 @@ struct LiveActivityPreviewView: View {
                 .watchView
                 .frame(width: la.size.width, height: la.size.height)
                 .cornerRadius(10)
+                .background(Color.gray.opacity(0.4))
             }
         }
     }
